@@ -2,6 +2,10 @@
 
 A magical productivity companion that helps you focus and stay organized with Pomodoro timer sessions and task management.
 
+## Demo
+
+https://github.com/user-attachments/assets/312e1218-00fd-4e1c-9769-69f17efdb338
+
 ## Features
 
 - **Animated Witch Companion**: Your magical study buddy that flies around during focus sessions
@@ -84,11 +88,6 @@ public/sprites/witch/
 - **Animations**: Custom React hooks + CSS
 - **State Management**: React useState/useEffect
 - **Build Tool**: Turbopack
-
-## Demo
-
-https://github.com/user-attachments/assets/312e1218-00fd-4e1c-9769-69f17efdb338
-
 
 ## Features Overview
 

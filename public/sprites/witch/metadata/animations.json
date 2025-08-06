@@ -1,0 +1,62 @@
+{
+  "witch_idle": {
+    "frames": 4,
+    "frameRate": 2,
+    "loop": true,
+    "frameWidth": 48,
+    "frameHeight": 48,
+    "totalWidth": 192,
+    "totalHeight": 48,
+    "description": "Idle breathing animation"
+  },
+  "witch_flying": {
+    "frames": 6,
+    "frameRate": 8,
+    "loop": true,
+    "frameWidth": 48,
+    "frameHeight": 48,
+    "totalWidth": 288,
+    "totalHeight": 48,
+    "description": "Flying on broomstick during timer"
+  },
+  "witch_walking": {
+    "frames": 8,
+    "frameRate": 12,
+    "loop": true,
+    "frameWidth": 48,
+    "frameHeight": 48,
+    "totalWidth": 384,
+    "totalHeight": 48,
+    "description": "Walking with broomstick in hand"
+  },
+  "witch_studying": {
+    "frames": 6,
+    "frameRate": 3,
+    "loop": true,
+    "frameWidth": 48,
+    "frameHeight": 48,
+    "totalWidth": 288,
+    "totalHeight": 48,
+    "description": "Reading/writing while studying"
+  },
+  "witch_spell": {
+    "frames": 8,
+    "frameRate": 10,
+    "loop": false,
+    "frameWidth": 48,
+    "frameHeight": 48,
+    "totalWidth": 384,
+    "totalHeight": 48,
+    "description": "Casting spell when todo completed"
+  },
+  "witch_sleeping": {
+    "frames": 4,
+    "frameRate": 1,
+    "loop": true,
+    "frameWidth": 48,
+    "frameHeight": 48,
+    "totalWidth": 192,
+    "totalHeight": 48,
+    "description": "Sleeping when inactive"
+  }
+}

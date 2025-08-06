@@ -1,16 +1,16 @@
-# 🧙‍♀️ Studying Witch
+# Studying Witch
 
 A magical productivity companion that helps you focus and stay organized with Pomodoro timer sessions and task management.
 
-## ✨ Features
+## Features
 
-- **🧙‍♀️ Animated Witch Companion**: Your magical study buddy that flies around during focus sessions
-- **⏰ Pomodoro Timer**: 25-minute focus sessions with magical breaks
-- **📋 Magical Todo List**: Task management with celebration animations
-- **🎨 Pixel Art Aesthetics**: Retro gaming vibes with modern functionality
-- **📊 Progress Tracking**: Monitor your study streaks and completed tasks
+- **Animated Witch Companion**: Your magical study buddy that flies around during focus sessions
+- **Pomodoro Timer**: 25-minute focus sessions with magical breaks
+- **Todo List**: Task management with celebration animations
+- **Pixel Art Aesthetics**: Retro gaming vibes with modern functionality
+- **Progress Tracking**: Monitor your study streaks and completed tasks
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -37,7 +37,7 @@ npm run dev
 
 4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-## 🎨 Pixel Art Assets
+## Pixel Art Assets
 
 The project is structured to support custom pixel art sprites:
 
@@ -66,7 +66,7 @@ public/sprites/witch/
 - Animation: Horizontal sprite sheets
 - Export: PNG format with JSON metadata
 
-## 🎭 Witch Animation States
+## Witch Animation States
 
 | Animation | Trigger | Frames | FPS | Description |
 |-----------|---------|--------|-----|-------------|
@@ -77,7 +77,7 @@ public/sprites/witch/
 | `spell` | Task completed | 8 | 10 | Casting celebration spell |
 | `sleeping` | Inactive | 4 | 1 | Sleeping with hat over eyes |
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Framework**: Next.js 15 with TypeScript
 - **Styling**: Tailwind CSS
@@ -85,7 +85,12 @@ public/sprites/witch/
 - **State Management**: React useState/useEffect
 - **Build Tool**: Turbopack
 
-## 📱 Features Overview
+## Demo
+
+https://github.com/user-attachments/assets/312e1218-00fd-4e1c-9769-69f17efdb338
+
+
+## Features Overview
 
 ### Pomodoro Timer
 - 25-minute focus sessions
@@ -106,7 +111,7 @@ public/sprites/witch/
 - Celebrates task completions with spell animations
 - Sleeps during inactive periods
 
-## 🎨 AI-Generated Pixel Art Prompts
+## AI-Generated Pixel Art Prompts
 
 Use these prompts with DALL-E, Midjourney, or other AI generators:
 
@@ -124,7 +129,7 @@ magical effects, celebration pose, 8 animation frames,
 purple and gold colors, 32x32 pixels"
 ```
 
-## 🔮 Pixel Art Design Tips
+## Pixel Art Design Tips
 
 1. **Color Palette**: Stick to 16 colors max
 2. **Consistency**: Keep the same art style across all animations
@@ -136,7 +141,7 @@ purple and gold colors, 32x32 pixels"
    - Friendly expression
    - Maybe add a small familiar (cat, owl)
 
-## 🔮 Future Enhancements
+## Future Enhancements
 
 - [ ] User authentication & profiles
 - [ ] Cloud data synchronization
@@ -147,7 +152,7 @@ purple and gold colors, 32x32 pixels"
 - [ ] Social features & study groups
 - [ ] Mobile app version
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create your feature branch (`git checkout -b feature/amazing-feature`)
@@ -157,4 +162,4 @@ purple and gold colors, 32x32 pixels"
 
 ---
 
-**Happy studying! 🧙‍♀️✨**
+**Happy studying!**

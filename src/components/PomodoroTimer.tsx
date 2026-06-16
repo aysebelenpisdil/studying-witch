@@ -8,12 +8,18 @@ interface PomodoroTimerProps {
   onTimerComplete: () => void;
 }
 
+const WORK_DURATION = 25 * 60;
+const SHORT_BREAK = 5 * 60;
+const LONG_BREAK = 15 * 60;
+
+const getBreakDuration = (sessionNum: number) => sessionNum % 4 === 0 ? LONG_BREAK : SHORT_BREAK;
+
 export const PomodoroTimer: React.FC<PomodoroTimerProps> = ({
   onTimerStart,
   onTimerStop,
   onTimerComplete
 }) => {
-  const [timeLeft, setTimeLeft] = useState(25 * 60); // 25 minutes in seconds
+  const [timeLeft, setTimeLeft] = useState(WORK_DURATION);
   const [isActive, setIsActive] = useState(false);
   const [isBreak, setIsBreak] = useState(false);
   const [session, setSession] = useState(1);
@@ -26,18 +32,14 @@ export const PomodoroTimer: React.FC<PomodoroTimerProps> = ({
         setTimeLeft(time => time - 1);
       }, 1000);
     } else if (timeLeft === 0) {
-      // Timer completed
       onTimerComplete();
-      
       if (isBreak) {
-        // Break finished, start new work session
         setIsBreak(false);
-        setTimeLeft(25 * 60); // 25 minutes work
+        setTimeLeft(WORK_DURATION);
         setSession(prev => prev + 1);
       } else {
-        // Work session finished, start break
         setIsBreak(true);
-        setTimeLeft(session % 4 === 0 ? 15 * 60 : 5 * 60); // Long break every 4 sessions
+        setTimeLeft(getBreakDuration(session));
       }
       setIsActive(false);
     }
@@ -59,12 +61,12 @@ export const PomodoroTimer: React.FC<PomodoroTimerProps> = ({
 
   const resetTimer = () => {
     setIsActive(false);
-    setTimeLeft(isBreak ? (session % 4 === 0 ? 15 * 60 : 5 * 60) : 25 * 60);
+    setTimeLeft(isBreak ? getBreakDuration(session) : WORK_DURATION);
     onTimerStop();
   };
 
   const skipSession = () => {
-    setTimeLeft(0); // This will trigger the useEffect to move to next session
+    setTimeLeft(0);
   };
 
   const formatTime = (seconds: number) => {
@@ -73,9 +75,10 @@ export const PomodoroTimer: React.FC<PomodoroTimerProps> = ({
     return `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
   };
 
-  const progress = isBreak 
-    ? ((session % 4 === 0 ? 15 * 60 : 5 * 60) - timeLeft) / (session % 4 === 0 ? 15 * 60 : 5 * 60) * 100
-    : (25 * 60 - timeLeft) / (25 * 60) * 100;
+  const breakDuration = getBreakDuration(session);
+  const progress = isBreak
+    ? (breakDuration - timeLeft) / breakDuration * 100
+    : (WORK_DURATION - timeLeft) / WORK_DURATION * 100;
 
   return (
     <div className="bg-purple-800/30 backdrop-blur-sm rounded-xl p-8 border border-purple-500/20 text-center">
@@ -84,7 +87,7 @@ export const PomodoroTimer: React.FC<PomodoroTimerProps> = ({
           {isBreak ? '☕ Break Time' : '📖 Study Session'}
         </h2>
         <div className="text-purple-200">
-          Session #{session} {isBreak && session % 4 === 0 ? '(Long Break)' : ''}
+          Session #{session} {isBreak && session % 4 === 0 && '(Long Break)'}
         </div>
       </div>
 
@@ -131,19 +134,19 @@ export const PomodoroTimer: React.FC<PomodoroTimerProps> = ({
 
       {/* Controls */}
       <div className="flex gap-4 justify-center">
-        {!isActive ? (
-          <button
-            onClick={startTimer}
-            className="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
-          >
-            {timeLeft === (isBreak ? (session % 4 === 0 ? 15 * 60 : 5 * 60) : 25 * 60) ? 'Start' : 'Resume'}
-          </button>
-        ) : (
+        {isActive ? (
           <button
             onClick={pauseTimer}
             className="bg-yellow-600 hover:bg-yellow-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
           >
             Pause
+          </button>
+        ) : (
+          <button
+            onClick={startTimer}
+            className="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
+          >
+            {timeLeft === (isBreak ? getBreakDuration(session) : WORK_DURATION) ? 'Start' : 'Resume'}
           </button>
         )}
         

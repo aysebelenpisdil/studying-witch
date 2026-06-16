@@ -50,6 +50,7 @@ export const ForestSounds: React.FC<ForestSoundsProps> = ({ autoPlay = true, sou
     >
       <source src="/sounds/forest-sounds.wav" type="audio/wav" />
       <source src="/sounds/forest-sounds.mp3" type="audio/mpeg" />
+      <track kind="captions" src="" label="No captions" default />
       Your browser does not support the audio element.
     </audio>
   );

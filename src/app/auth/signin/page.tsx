@@ -5,6 +5,13 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { WitchSprite } from "@/components/WitchSprite";
 
+const STARS = new Array(20).fill(null).map((_, i) => ({
+  id: `star-${i}`,
+  top: `${(i * 17 + 23) % 100}%`,
+  left: `${(i * 31 + 47) % 100}%`,
+  delay: `${((i * 13 + 11) % 30) / 10}s`,
+}));
+
 interface Provider {
   id: string;
   name: string;
@@ -26,14 +33,14 @@ export default function SignIn() {
     <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center p-4">
       {/* Background stars */}
       <div className="absolute inset-0 overflow-hidden">
-        {[...Array(20)].map((_, i) => (
+        {STARS.map((star) => (
           <div
-            key={i}
-            className={`absolute w-1 h-1 bg-yellow-300 rounded-full animate-pulse`}
+            key={star.id}
+            className="absolute w-1 h-1 bg-yellow-300 rounded-full animate-pulse"
             style={{
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 3}s`,
+              top: star.top,
+              left: star.left,
+              animationDelay: star.delay,
             }}
           />
         ))}
@@ -78,20 +85,22 @@ export default function SignIn() {
           </h3>
           <form className="space-y-4">
             <div>
-              <label className="block text-purple-200 text-sm font-medium mb-2">
+              <label htmlFor="signin-email" className="block text-purple-200 text-sm font-medium mb-2">
                 Email
               </label>
               <input
+                id="signin-email"
                 type="email"
                 className="w-full px-3 py-2 bg-purple-900/50 border border-purple-500/30 rounded-lg text-white placeholder-purple-300 focus:border-purple-400 focus:outline-none"
                 placeholder="email@example.com"
               />
             </div>
             <div>
-              <label className="block text-purple-200 text-sm font-medium mb-2">
+              <label htmlFor="signin-password" className="block text-purple-200 text-sm font-medium mb-2">
                 Password
               </label>
               <input
+                id="signin-password"
                 type="password"
                 className="w-full px-3 py-2 bg-purple-900/50 border border-purple-500/30 rounded-lg text-white placeholder-purple-300 focus:border-purple-400 focus:outline-none"
                 placeholder="••••••••"
@@ -109,7 +118,7 @@ export default function SignIn() {
         {/* Footer */}
         <div className="text-center mt-6">
           <p className="text-purple-300 text-sm">
-            Don't have an account?{' '}
+            Don&apos;t have an account?{' '}
             <Link href="/auth/signup" className="text-purple-400 hover:text-purple-300 underline">
               Sign up
             </Link>

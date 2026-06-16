@@ -1,6 +1,15 @@
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
+
+const SPARKLES = new Array(30).fill(null).map((_, i) => ({
+  id: `sparkle-${i}`,
+  top: `${(i * 17 + 23) % 100}%`,
+  left: `${(i * 31 + 47) % 100}%`,
+  delay: `${((i * 13 + 11) % 50) / 10}s`,
+  opacity: ((i * 7 + 3) % 80) / 100 * 0.8 + 0.2,
+  duration: `${((i * 19 + 29) % 30) / 10 + 2}s`,
+}));
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import { WitchSprite } from '@/components/WitchSprite';
@@ -38,9 +47,9 @@ export default function StudyPage() {
     const storedCompletedTasks = localStorage.getItem('completedTasks') || '0';
     const storedDailyStats = localStorage.getItem('dailyStats') || '{}';
     
-    setSessionsToday(parseInt(storedSessionsToday));
-    setTotalFocusTime(parseInt(storedTotalFocusTime));
-    setCompletedTasks(parseInt(storedCompletedTasks));
+    setSessionsToday(Number.parseInt(storedSessionsToday));
+    setTotalFocusTime(Number.parseInt(storedTotalFocusTime));
+    setCompletedTasks(Number.parseInt(storedCompletedTasks));
     setDailyStats(JSON.parse(storedDailyStats));
   }, []);
 
@@ -71,27 +80,20 @@ export default function StudyPage() {
     if (isTimerActive && witchAnimation === 'flying') {
       movementInterval.current = setInterval(() => {
         setWitchPosition(prev => {
-          // Kedi gibi doğal hareket - hedefe doğru git veya yeni hedef seç
-          const distanceToTarget = Math.sqrt(
-            Math.pow(targetPosition.x - prev.x, 2) + Math.pow(targetPosition.y - prev.y, 2)
-          );
-          
-          // Hedefe yaklaştıysak yeni hedef seç
+          const distanceToTarget = Math.hypot(targetPosition.x - prev.x, targetPosition.y - prev.y);
+
           if (distanceToTarget < 8) {
-            // Yeni rastgele hedef (deterministic seed kullan) - TÜM EKRANI KAPSA
-            const seedX = (movementCounter * 17 + Date.now() % 1000) % 95 + 3; // 3-98 arasında
-            const seedY = (movementCounter * 31 + Date.now() % 1000) % 95 + 3; // 3-98 arasında
+            const seedX = (movementCounter * 17 + Date.now() % 1000) % 95 + 3;
+            const seedY = (movementCounter * 31 + Date.now() % 1000) % 95 + 3;
             setTargetPosition({ x: seedX, y: seedY });
-            setMovementCounter(prev => prev + 1);
+            setMovementCounter(movementCounter + 1);
           }
-          
-          // Hedefe doğru hareket et (daha doğal adımlar)
+
           const deltaX = targetPosition.x - prev.x;
           const deltaY = targetPosition.y - prev.y;
-          
-          // Hareket hızını normalize et (kedi hızı) - biraz daha hızlı
-          const moveSpeed = 2.0;
-          const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+
+          const moveSpeed = 2;
+          const distance = Math.hypot(deltaX, deltaY);
           
           let newX = prev.x;
           let newY = prev.y;
@@ -108,10 +110,8 @@ export default function StudyPage() {
           return { x: newX, y: newY };
         });
       }, 100); // Daha akıcı hareket için daha sık güncelle
-    } else {
-      if (movementInterval.current) {
-        clearInterval(movementInterval.current);
-      }
+    } else if (movementInterval.current) {
+      clearInterval(movementInterval.current);
     }
 
     return () => {
@@ -133,10 +133,8 @@ export default function StudyPage() {
           return prev - 1;
         });
       }, 1000);
-    } else {
-      if (timerInterval.current) {
-        clearInterval(timerInterval.current);
-      }
+    } else if (timerInterval.current) {
+      clearInterval(timerInterval.current);
     }
 
     return () => {
@@ -238,28 +236,19 @@ export default function StudyPage() {
          }}>
       {/* Background stars/sparkles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(30)].map((_, i) => {
-          // Use index-based deterministic values instead of Math.random()
-          const seed1 = (i * 17 + 23) % 100;
-          const seed2 = (i * 31 + 47) % 100; 
-          const seed3 = (i * 13 + 11) % 50;
-          const seed4 = (i * 7 + 3) % 80;
-          const seed5 = (i * 19 + 29) % 30;
-          
-          return (
-            <div
-              key={i}
-              className={`absolute w-1 h-1 bg-yellow-300 rounded-full animate-pulse`}
-              style={{
-                top: `${seed1}%`,
-                left: `${seed2}%`,
-                animationDelay: `${seed3 / 10}s`,
-                opacity: (seed4 / 100) * 0.8 + 0.2,
-                animationDuration: `${(seed5 / 10) + 2}s`
-              }}
-            />
-          );
-        })}
+        {SPARKLES.map((sparkle) => (
+          <div
+            key={sparkle.id}
+            className="absolute w-1 h-1 bg-yellow-300 rounded-full animate-pulse"
+            style={{
+              top: sparkle.top,
+              left: sparkle.left,
+              animationDelay: sparkle.delay,
+              opacity: sparkle.opacity,
+              animationDuration: sparkle.duration,
+            }}
+          />
+        ))}
       </div>
 
       {/* Floating Witch - Full Screen Coverage */}
@@ -335,7 +324,7 @@ export default function StudyPage() {
         {/* Normal Layout: Side by Side */}
         {!isTimerActive && (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 min-h-[600px]">
-            {/* Left: Todo List */}
+            {/* Left: Task List */}
             <div className="order-2 lg:order-1">
               <TodoList onTaskComplete={handleTaskComplete} />
             </div>
@@ -350,7 +339,7 @@ export default function StudyPage() {
           </div>
         )}
 
-        {/* Active Layout: Timer Center, Todo Small Bottom */}
+        {/* Active Layout: Timer Center, Tasks at Bottom */}
         {isTimerActive && (
           <div className="space-y-6">
             {/* Center: Active Timer Display */}
@@ -405,7 +394,7 @@ export default function StudyPage() {
               </div>
             </div>
 
-            {/* Bottom: Compact Todo List */}
+            {/* Bottom: Compact Task List */}
             <div className="max-w-md mx-auto">
               <div className="transform scale-75 origin-top">
                 <TodoList onTaskComplete={handleTaskComplete} />
@@ -454,7 +443,7 @@ export default function StudyPage() {
           </button>
           <button 
             onClick={() => setSoundEnabled(!soundEnabled)}
-            className={`text-white/70 hover:text-white transition-colors p-2 rounded-full hover:bg-white/20 ${!soundEnabled ? 'opacity-50' : ''}`} 
+            className={`text-white/70 hover:text-white transition-colors p-2 rounded-full hover:bg-white/20 ${soundEnabled ? '' : 'opacity-50'}`}
             title={soundEnabled ? "Mute Sounds" : "Unmute Sounds"}
           >
             {soundEnabled ? '🎵' : '🔇'}

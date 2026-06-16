@@ -75,7 +75,7 @@ export const TodoList: React.FC<TodoListProps> = ({ onTaskComplete }) => {
         </div>
       </div>
 
-      {/* Add new todo */}
+      {/* Add new task */}
       <form onSubmit={addTodo} className="mb-4">
         <div className="flex gap-2">
           <input
@@ -94,7 +94,7 @@ export const TodoList: React.FC<TodoListProps> = ({ onTaskComplete }) => {
         </div>
       </form>
 
-      {/* Todo list */}
+      {/* Task list */}
       <div className="space-y-2 max-h-96 overflow-y-auto">
         {todos.length === 0 ? (
           <div className="text-center py-8 text-purple-300">

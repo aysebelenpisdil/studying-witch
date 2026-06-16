@@ -68,9 +68,8 @@ export const TimerControl: React.FC<TimerControlProps> = ({
   }, [isDragging, handleMouseMove]);
 
   const handleStartTimer = () => {
-    if (!isActive) {
-      onTimerStart(minutes);
-    }
+    if (isActive) return;
+    onTimerStart(minutes);
   };
 
   // Calculate position of the handle
@@ -89,9 +88,16 @@ export const TimerControl: React.FC<TimerControlProps> = ({
       <div className="relative mb-8">
         <div
           ref={dialRef}
+          role="slider"
+          aria-label="Timer duration"
+          aria-valuemin={1}
+          aria-valuemax={120}
+          aria-valuenow={minutes}
+          aria-disabled={isActive}
+          tabIndex={isActive ? -1 : 0}
           className={`relative w-64 h-64 rounded-full border-8 transition-all duration-200 ${
-            isActive 
-              ? 'border-purple-500/50 cursor-not-allowed' 
+            isActive
+              ? 'border-purple-500/50 cursor-not-allowed'
               : 'border-purple-500/30 cursor-pointer hover:border-purple-400/50'
           } bg-purple-900/20`}
           onMouseDown={handleMouseDown}

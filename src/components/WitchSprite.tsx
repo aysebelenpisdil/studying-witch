@@ -12,12 +12,18 @@ export const WitchSprite: React.FC<WitchSpriteProps> = ({
   className = '' 
 }) => {
 
-  // Use the witch.png image with animations
+  const animationStyles: Record<string, string> = {
+    idle: 'witch-idle 2s ease-in-out infinite',
+    flying: 'witch-flying 0.8s ease-in-out infinite',
+    spell: 'witch-spell 1s ease-in-out',
+  };
+  const animationStyle = animationStyles[animation] ?? 'none';
+
   return (
     <div className={`witch-sprite ${className}`}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img 
-        src="/witch.png" 
+      <img
+        src="/witch.png"
         alt="Witch"
         className={`
           w-36 h-36 object-contain
@@ -28,9 +34,7 @@ export const WitchSprite: React.FC<WitchSpriteProps> = ({
         `}
         style={{
           imageRendering: 'pixelated',
-          animation: animation === 'idle' ? 'witch-idle 2s ease-in-out infinite' : 
-                    animation === 'flying' ? 'witch-flying 0.8s ease-in-out infinite' :
-                    animation === 'spell' ? 'witch-spell 1s ease-in-out' : 'none'
+          animation: animationStyle,
         }}
       />
       <style jsx>{`

@@ -79,6 +79,8 @@ export const PomodoroTimer: React.FC<PomodoroTimerProps> = ({
   const progress = isBreak
     ? (breakDuration - timeLeft) / breakDuration * 100
     : (WORK_DURATION - timeLeft) / WORK_DURATION * 100;
+  const fullDuration = isBreak ? breakDuration : WORK_DURATION;
+  const startButtonLabel = timeLeft === fullDuration ? 'Start' : 'Resume';
 
   return (
     <div className="bg-purple-800/30 backdrop-blur-sm rounded-xl p-8 border border-purple-500/20 text-center">
@@ -146,7 +148,7 @@ export const PomodoroTimer: React.FC<PomodoroTimerProps> = ({
             onClick={startTimer}
             className="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
           >
-            {timeLeft === (isBreak ? getBreakDuration(session) : WORK_DURATION) ? 'Start' : 'Resume'}
+            {startButtonLabel}
           </button>
         )}
         

@@ -1,21 +1,21 @@
-# Studying Witch
+# Studying Witch 🧙‍♀️
 
-A magical productivity companion that helps you focus and stay organized with a customizable focus timer and task management.
+A little magical companion I built to make studying feel less like a chore. She flies around your screen while you focus, celebrates when you finish tasks, and gently keeps you on track with a customizable timer.
 
 ## Demo
 
 https://github.com/user-attachments/assets/312e1218-00fd-4e1c-9769-69f17efdb338
 
-## Features
+## What it does
 
-- **Animated Witch Companion** — Your magical study buddy that flies around the screen during focus sessions
-- **Custom Focus Timer** — Drag-dial timer (1–120 minutes) with presets for Pomodoro and deep work
-- **Pomodoro Mode** — 25-minute sessions, 5-minute short breaks, 15-minute long breaks every 4 sessions
-- **Task List** — Add, complete, and delete tasks with spell celebration animations
-- **Forest Ambient Sounds** — Looping background audio to help you concentrate
-- **Session Stats** — Track sessions, total focus time, and completed tasks across the day
-- **Google OAuth** — Sign in with your Google account
-- **Pixel Art Aesthetics** — Retro 16-bit visuals with smooth CSS animations
+- **Animated Witch Companion** — She floats around your screen during focus sessions and does a little spin when you complete something. Genuinely motivating, somehow.
+- **Custom Focus Timer** — Drag the dial to set anywhere from 1 to 120 minutes. Presets for Pomodoro and deep work if you don't want to think about it.
+- **Pomodoro Mode** — Classic 25/5 with a longer 15-minute break every 4 sessions.
+- **Task List** — Add tasks, check them off, watch the witch celebrate. Small dopamine hits matter.
+- **Forest Ambient Sounds** — Looping background audio. Helps more than you'd expect.
+- **Session Stats** — See how many sessions you've done, total focus time, and tasks completed for the day.
+- **Google Sign-In** — Log in with your Google account, no new passwords to forget.
+- **Pixel Art Aesthetics** — Retro 16-bit visuals because why not.
 
 ## Tech Stack
 
@@ -35,7 +35,7 @@ https://github.com/user-attachments/assets/312e1218-00fd-4e1c-9769-69f17efdb338
 
 ### Installation
 
-1. Clone the repository
+1. Clone the repo
 
 ```bash
 git clone <repository-url>
@@ -54,15 +54,15 @@ npm install
 cp .env.example .env.local
 ```
 
-Fill in your Google OAuth credentials and NextAuth secret in `.env.local`.
+Fill in your Google OAuth credentials and a NextAuth secret in `.env.local`.
 
-4. Run the development server
+4. Start the dev server
 
 ```bash
 npm run dev
 ```
 
-5. Open [http://localhost:3000](http://localhost:3000) in your browser
+5. Open [http://localhost:3000](http://localhost:3000) and meet your witch.
 
 ## Project Structure
 
@@ -94,26 +94,22 @@ src/
 
 ## Code Quality
 
-This project is analyzed with SonarCloud. All reported Code Smells, Bugs, and Vulnerabilities have been resolved, including:
+Analyzed with SonarCloud — all open issues resolved. Things I paid attention to:
 
-- Accessible form labels (`htmlFor`/`id` associations)
-- ARIA attributes on custom interactive elements
+- Accessible form labels and ARIA attributes on interactive elements
 - `Number.parseInt` over global `parseInt`
-- `Math.hypot` over manual distance calculations
+- `Math.hypot` instead of manual distance math
 - `node:path` / `node:url` protocol imports
-- Cognitive complexity kept within thresholds
-- No nested ternary operations in render output
-- Stable React list keys (no array-index keys)
-- `<track>` element on `<audio>` for accessibility
+- Cognitive complexity within thresholds
+- No nested ternaries in render output
+- Stable React list keys
+- `<track>` on `<audio>` for accessibility
+- Positive condition checks (`=== 1` instead of `!== 1`) for readability
 
 ## Contributing
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+PRs welcome. Fork, branch, commit, push, open a PR — the usual.
 
 ---
 
-**Happy studying!**
+Happy studying! 🌙

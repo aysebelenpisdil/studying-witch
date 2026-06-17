@@ -133,7 +133,7 @@ export const TimerControl: React.FC<TimerControlProps> = ({
                 {minutes}
               </div>
               <div className="text-purple-200 text-sm">
-                minute{minutes !== 1 ? 's' : ''}
+                minute{minutes === 1 ? '' : 's'}
               </div>
             </div>
           </div>

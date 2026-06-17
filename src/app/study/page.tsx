@@ -153,8 +153,8 @@ export default function StudyPage() {
     setCurrentSessionStart(new Date());
     
     // Timer başladığında rastgele bir noktaya git ki tüm ekranı dolaşsın
-    const randomX = Math.random() * 80 + 10; // 10-90 arasında
-    const randomY = Math.random() * 80 + 10; // 10-90 arasında  
+    const randomX = Math.random() * 80 + 10; // NOSONAR — UI animation position, not security-sensitive
+    const randomY = Math.random() * 80 + 10; // NOSONAR — UI animation position, not security-sensitive
     setTargetPosition({ x: randomX, y: randomY });
   };
 
